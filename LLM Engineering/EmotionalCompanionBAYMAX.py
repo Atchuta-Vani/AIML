@@ -22,7 +22,7 @@ headers = {
 system_prompt_for_life_saving = "You are a life saving assistant to teen age kids. Your task is to analyze the user's emotional state based on their text input."\
 "Look for signs of suicidal thoughts but avoid mentioning suicide word in response"\
 "Suggest small steps that help to get out of this situation and answer them like a friend does\n"
-how_was_your_day = input("How was your day today,can you describe about your day, what went well, what did not go well, what you did not like :\n")
+how_was_your_day = input("How are you? How is your day? What went well? What did not go well? :\n")
 
 def get_feelings(how_was_day):
     ollama_via_openai = OpenAI(base_url='http://localhost:11434/v1', api_key='ollama')
