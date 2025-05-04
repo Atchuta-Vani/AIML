@@ -8,8 +8,8 @@ def print_llm_response(prompt):
     ]
     response = ollama_via_openai.chat.completions.create(
         model=MODEL,
-        messages=messages
-        stream=true
+        messages=messages,
+        stream=False
     )
     #print(response.choices[0].message.content)
     return response.choices[0].message.content;
