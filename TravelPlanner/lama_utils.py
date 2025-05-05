@@ -16,3 +16,9 @@ def print_llm_response(prompt):
 
 # Print in Markdown format
 #display(Markdown(response.choices[0].message.content))
+
+def llm_response_for_UI(city,country,duration):
+    prompt = f"""I will visit {city}, {country}, for a duration of {duration}. 
+Please create a detailed daily itinerary."""
+    llm_response = print_llm_response(prompt)
+    return llm_response
