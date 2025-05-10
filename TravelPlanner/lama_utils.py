@@ -6,6 +6,7 @@ def print_llm_response(prompt):
     messages = [
         {"role": "user", "content": prompt}
     ]
+    #print(messages)
     response = ollama_via_openai.chat.completions.create(
         model=MODEL,
         messages=messages,
@@ -17,8 +18,8 @@ def print_llm_response(prompt):
 # Print in Markdown format
 #display(Markdown(response.choices[0].message.content))
 
-def llm_response_for_UI(city,country,duration):
-    prompt = f"""I will visit {city}, {country}, for a duration of {duration}. 
-Please create a detailed daily itinerary."""
+def llm_response_for_UI(city,country,arrival,departure):
+    prompt = f"""I will visit {city}, {country}, for a duration of {arrival} and {departure}. 
+Please create a daily itinerary."""
     llm_response = print_llm_response(prompt)
     return llm_response
