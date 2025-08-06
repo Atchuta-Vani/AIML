@@ -1,0 +1,116 @@
+Travel Planner Agents to handle different tasks intelligently and collaboratively.
+
+---
+
+## 🧠 Agent Design for TravelPlanner
+
+Here are a few **useful agent roles** you can build into your app:
+
+---
+
+### 🗺️ 1. **LocationSearchAgent**
+
+**Goal:** Given a location and date range, search for interesting places, events, or attractions.
+
+* **Inputs:** Location, start date, end date, user preferences (optional)
+* **Tools:** WebSearchTool, Event API (like Eventbrite, Google Events)
+* **Behavior:** Uses LLM + search tools to compile a list of:
+
+  * Attractions (museums, parks, landmarks)
+  * Events (festivals, concerts)
+  * Weather-aware activities
+* **Output:** List of `AttractionItem` or `EventItem` objects
+
+---
+
+### 🗓️ 2. **ItineraryPlannerAgent**
+
+**Goal:** Convert attractions/events into a daily travel plan.
+
+* **Inputs:** List of attractions/events, location, number of days
+* **Tools:** Optional – calendar APIs
+* **Behavior:**
+
+  * Groups attractions by proximity
+  * Balances busy and light days
+  * Adds breaks/meals if needed
+* **Output:** `ItineraryPlan` with daily plans, maps, and timing
+
+---
+
+### 💵 3. **BudgetAdvisorAgent**
+
+**Goal:** Provide a budget estimate and cost breakdown for the trip.
+
+* **Inputs:** Selected itinerary, location, travel preferences
+* **Tools:** Currency converter, flight/hotel APIs, OpenAI function tool
+* **Output:** `TripBudgetReport` with estimated costs: transport, food, lodging, tickets
+
+---
+
+### 📩 4. **EmailAgent** (or `ItineraryEmailAgent`)
+
+**Goal:** Send the finalized itinerary or trip summary via email.
+
+* **Tools:** `@function_tool` that writes to email or PDF
+* **Output:** Confirmation or link to the report
+
+---
+
+### ✨ Bonus Ideas
+
+You could also add:
+
+| Agent Name              | Purpose                                             |
+| ----------------------- | --------------------------------------------------- |
+| **WeatherCheckerAgent** | Warns about weather that could affect travel        |
+| **TravelDocAgent**      | Checks for visa, vaccine, or document needs         |
+| **BookingAgent**        | Suggests or books flights/hotels (future expansion) |
+
+---
+
+## 📦 Output Types
+
+You can define structured outputs like:
+
+```python
+class AttractionItem:
+    name: str
+    type: str
+    description: str
+    url: str
+    estimated_time: str
+
+class ItineraryPlan:
+    days: List[Dict[str, List[AttractionItem]]]
+
+class TripBudgetReport:
+    total_cost: float
+    breakdown: Dict[str, float]
+```
+
+---
+
+## ✅ Example Workflow (Agent Pipeline)
+
+1. **User input**: "Plan a 5-day trip to Paris in October"
+2. **Planner agent** decides to:
+
+   * Ask `LocationSearchAgent` for attractions
+   * Call `ItineraryPlannerAgent` to schedule them
+   * Ask `BudgetAdvisorAgent` to estimate costs
+   * Use `EmailAgent` to send the result
+
+---
+
+## 🧠 Tools You Might Use
+
+* `WebSearchTool` – to find events/places
+* `function_tool` – for local tools like PDF writing, maps, APIs
+* `ModelSettings(tool_choice="required")` – to ensure agents always use tools when needed
+
+---
+
+Next Step:
+
+Write Python class for any of these agents using OpenAI's Agent SDK.
