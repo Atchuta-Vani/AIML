@@ -1,3 +1,5 @@
+#builds, trains, and evaluates a simple neural network to classify handwritten digits (0–9) from the MNIST dataset.
+
 import torch
 import torch.nn as nn
 import torch.optim as optim
